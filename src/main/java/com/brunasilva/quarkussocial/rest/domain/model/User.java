@@ -1,15 +1,26 @@
 package com.brunasilva.quarkussocial.rest.domain.model;
 
-import io.quarkus.mongodb.panache.PanacheMongoEntity;
 import io.quarkus.mongodb.panache.common.MongoEntity;
+import org.bson.types.ObjectId;
 
+import javax.persistence.Id;
 import java.util.Objects;
 
 @MongoEntity(collection = "user")
-public class User extends PanacheMongoEntity {
+public class User{
 
+    @Id
+    private ObjectId id;
     private String name;
     private Integer age;
+
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
