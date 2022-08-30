@@ -1,13 +1,13 @@
 package com.brunasilva.quarkussocial.rest;
 
-import com.brunasilva.quarkussocial.rest.domain.model.User;
-import com.brunasilva.quarkussocial.rest.domain.repository.UserRepository;
+import com.brunasilva.quarkussocial.domain.model.User;
+import com.brunasilva.quarkussocial.domain.repository.UserRepository;
 import com.brunasilva.quarkussocial.rest.dto.CreateUserRequest;
 import com.brunasilva.quarkussocial.rest.dto.ResponseError;
-import io.quarkus.mongodb.panache.PanacheQuery;
-import org.bson.types.ObjectId;
+import io.quarkus.hibernate.orm.panache.PanacheQuery;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import javax.ws.rs.*;
@@ -20,17 +20,18 @@ import java.util.Set;
 @Produces(MediaType.APPLICATION_JSON)
 public class UserResource {
 
-    private final UserRepository repository;
-    private final Validator validator;
+    private UserRepository repository;
+    private Validator validator;
 
     @Inject
-    public UserResource(final UserRepository repository, final Validator validator) {
+    public UserResource(UserRepository repository, Validator validator){
         this.repository = repository;
         this.validator = validator;
     }
 
     @POST
-    public Response createUser(CreateUserRequest userRequest) {
+    @Transactional
+    public Response createUser( CreateUserRequest userRequest ){
 
         Set<ConstraintViolation<CreateUserRequest>> violations = validator.validate(userRequest);
         if(!violations.isEmpty()){
@@ -52,17 +53,18 @@ public class UserResource {
     }
 
     @GET
-    public Response listAllUsers() {
+    public Response listAllUsers(){
         PanacheQuery<User> query = repository.findAll();
         return Response.ok(query.list()).build();
     }
 
     @DELETE
     @Path("{id}")
-    public Response deleteUser(@PathParam("id") ObjectId id) {
+    @Transactional
+    public Response deleteUser( @PathParam("id") Long id){
         User user = repository.findById(id);
 
-        if (user != null) {
+        if(user != null){
             repository.delete(user);
             return Response.noContent().build();
         }
@@ -72,18 +74,17 @@ public class UserResource {
 
     @PUT
     @Path("{id}")
-    public Response updateUser(@PathParam("id") ObjectId id, CreateUserRequest userData) {
+    @Transactional
+    public Response updateUser( @PathParam("id") Long id, CreateUserRequest userData ){
         User user = repository.findById(id);
 
-        if (user != null) {
+        if(user != null){
             user.setName(userData.getName());
             user.setAge(userData.getAge());
-
-            repository.update(user);
-
             return Response.noContent().build();
         }
 
         return Response.status(Response.Status.NOT_FOUND).build();
     }
+
 }
