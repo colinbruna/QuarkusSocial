@@ -6,4 +6,7 @@ If you want to learn more about Quarkus, please visit its website: https://quark
 
 Tecnologias utilizadas: Quarkus, Java 11, Gradle
 
-Banco de dados: MongoDB
+Banco de dados da aplicação: PostgreSQL
+
+Banco de dados testes: H2
+
