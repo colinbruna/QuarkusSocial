@@ -22,6 +22,7 @@ dependencies {
     implementation 'io.quarkus:quarkus-resteasy-jsonb:2.11.2.Final'
     implementation 'io.quarkus:quarkus-mongodb-panache:2.12.0.Final'
     implementation 'io.quarkus:quarkus-mongodb-panache-common:2.12.0.Final'
+    implementation 'io.quarkus:quarkus-smallrye-openapi:2.12.0.Final'
 
     testImplementation 'io.quarkus:quarkus-junit5'
     testImplementation 'io.rest-assured:rest-assured'
