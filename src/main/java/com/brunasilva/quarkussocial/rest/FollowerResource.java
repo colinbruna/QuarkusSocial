@@ -30,9 +30,7 @@ public class FollowerResource {
 
     @PUT
     @Transactional
-    public Response followUser(
-            @PathParam(("userId")) Long userId, FollowerRequest request) {
-
+    public Response followUser(@PathParam(("userId")) Long userId, FollowerRequest request) {
         if (userId.equals(request.getFollowerId())) {
             return Response
                     .status(Response.Status.CONFLICT)
