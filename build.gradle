@@ -16,6 +16,7 @@ dependencies {
     implementation 'io.quarkus:quarkus-resteasy:2.11.2.Final'
     implementation 'io.quarkus:quarkus-hibernate-validator:2.11.2.Final'
     implementation 'io.quarkus:quarkus-jdbc-h2:2.11.2.Final'
+    implementation 'io.quarkus:quarkus-jdbc-postgresql:2.12.0.Final'
     implementation 'io.quarkus:quarkus-hibernate-orm:2.11.2.Final'
     implementation 'io.quarkus:quarkus-hibernate-orm-panache:2.11.2.Final'
     implementation 'io.quarkus:quarkus-resteasy-jsonb:2.11.2.Final'
