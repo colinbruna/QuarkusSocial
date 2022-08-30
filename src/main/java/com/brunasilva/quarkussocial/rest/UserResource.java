@@ -31,7 +31,7 @@ public class UserResource {
 
     @POST
     @Transactional
-    public Response createUser( CreateUserRequest userRequest ){
+    public Response createUser(CreateUserRequest userRequest){
 
         Set<ConstraintViolation<CreateUserRequest>> violations = validator.validate(userRequest);
         if(!violations.isEmpty()){
@@ -61,7 +61,7 @@ public class UserResource {
     @DELETE
     @Path("{id}")
     @Transactional
-    public Response deleteUser( @PathParam("id") Long id){
+    public Response deleteUser(@PathParam("id") Long id){
         User user = repository.findById(id);
 
         if(user != null){
@@ -75,7 +75,7 @@ public class UserResource {
     @PUT
     @Path("{id}")
     @Transactional
-    public Response updateUser( @PathParam("id") Long id, CreateUserRequest userData ){
+    public Response updateUser(@PathParam("id") Long id, CreateUserRequest userData){
         User user = repository.findById(id);
 
         if(user != null){
