@@ -55,7 +55,6 @@ public class PostResource {
 
         return Response
                 .status(Response.Status.CREATED)
-                .entity(post)
                 .build();
     }
 
