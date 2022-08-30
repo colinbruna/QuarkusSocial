@@ -10,3 +10,5 @@ Banco de dados da aplicação: PostgreSQL
 
 Banco de dados testes: H2
 
+http://localhost:8080/q/swagger-ui/#/
+
